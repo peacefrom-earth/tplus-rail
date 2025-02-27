@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Results Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        video { width: 80%; max-width: 600px; margin-top: 20px; }
+        button { font-size: 18px; padding: 10px; margin: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h2>Battle Results</h2>
+    <button onclick="fetchResults()">Load Latest Results</button>
+    <p id="resultsText">Click to load results...</p>
+    <video id="resultsVideo" controls class="hidden">
+        <source id="resultsSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <h2>Past Battle Log</h2>
+    <button onclick="toggleLog()">Toggle Event Log</button>
+    <div id="eventLog" class="hidden"></div>
+    
+    <script>
+        function fetchResults() {
+            fetch('/get-results')
+                .then(response => response.json())
+                .then(data => {
+                    let mostVotedMove = Object.keys(data.results).reduce((a, b) => data.results[a] > data.results[b] ? a : b);
+                    document.getElementById("resultsText").innerText = "Most voted move: " + mostVotedMove;
+                    document.getElementById("resultsSource").src = "https://cloudhost.com/videos/" + mostVotedMove.toLowerCase().replace(/ /g, "_") + ".mp4";
+                    document.getElementById("resultsVideo").classList.remove("hidden");
+                    document.getElementById("resultsVideo").load();
+                    document.getElementById("resultsVideo").play();
+                })
+                .catch(error => console.error("Error fetching results:", error));
+        }
+
+        function toggleLog() {
+            fetch('/get-results')
+                .then(response => response.json())
+                .then(data => {
+                    let logDiv = document.getElementById("eventLog");
+                    logDiv.innerHTML = "<h3>Past Events</h3>";
+                    Object.entries(data.results).forEach(([move, votes]) => {
+                        logDiv.innerHTML += `<p>${move}: ${votes} votes</p>`;
+                    });
+                    logDiv.classList.toggle("hidden");
+                })
+                .catch(error => console.error("Error fetching event log:", error));
+        }
+    </script>
+</body>
+</html>
+

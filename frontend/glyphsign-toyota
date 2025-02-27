@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota CAPTCHA</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .scrambled { font-size: 24px; margin: 20px; }
+        input { font-size: 20px; padding: 5px; }
+        button { font-size: 18px; padding: 10px; margin-top: 10px; }
+        #result { font-size: 20px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h2>Unscramble the word</h2>
+    <p class="scrambled" id="scrambledWord"></p>
+    <input type="text" id="userInput" placeholder="Enter correct word">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="result"></p>
+
+    <script>
+        const scrambledWords = ["YTOOTA", "AOTOTY", "TOAYOT"];
+        const correctWord = "TOYOTA";
+        
+        document.getElementById("scrambledWord").innerText = scrambledWords[Math.floor(Math.random() * scrambledWords.length)];
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById("userInput").value.toUpperCase();
+            if (userAnswer === correctWord) {
+                document.getElementById("result").innerText = "✅ Correct! Proceeding...";
+            } else {
+                document.getElementById("result").innerText = "❌ Incorrect! Try again.";
+            }
+        }
+    </script>
+</body>
+</html>
