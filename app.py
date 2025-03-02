@@ -53,34 +53,30 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
+if request.method == "POST":
+    if User.query.filter_by(email=email).first():
+        return jsonify({'message': 'User already exists'}), 400
+
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    new_user = User(email=email, password=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+
     return jsonify({'message': 'User registered successfully'}), 201
 else:
     # Serve registration form for GET requests
     return '''
-    <html>
-    <body>
-    <h2>Register</h2>
-    <form method='POST'>
+<html>
+<body>
+<h2>Register</h2>
+<form method='POST'>
     <input type="email" name="email" placeholder="Enter your email" required><br>
     <input type="password" name="password" placeholder="Enter password" required><br>
     <input type="submit" value="Register">
-    </form>
-    </body>
-    </html>
-    '''
-    #Serve regeistration form for GET requests
-    return '''
-    <html>
-    <body>
-    <h2>Register</h2>
-    <form method='POST'>
-    <input type="email" name="email" placeholder="Enter your email" required><br>
-    <input type="password" name="password" placeholder"Enter password" required><br>
-    <input type="submit" value="Register">
-    </form>
-    </body>
-    </html>
-    ''', 200
+</form>
+</body>
+</html>
+''', 200
     # Login Endpoint
     @app.route('/login', methods=['POST'])
     def login():
