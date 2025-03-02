@@ -95,4 +95,4 @@ else:
         app.run(host="0.0.0.0" , port=5003)
 
     for rule in app.url_map.iter_rules():
-    print(f"Route: {rule} - Methods: {rule.methods}")
+        print(f"Route: {rule} - Methods: {rule.methods}")
