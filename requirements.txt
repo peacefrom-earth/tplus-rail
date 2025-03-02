@@ -40,7 +40,6 @@ markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
 packaging==24.2
-pkg_resources==0.0.0
 psutil==7.0.0
 psycopg2-binary==2.9.10
 pyclang==0.6.0
