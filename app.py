@@ -86,7 +86,7 @@ else:
 
     user = User.query.filter_by(email=email).first()
     if user and bcrypt.check_password_hash(user.password, password):
-    access_token = create_access_token(identity=email)
+        access_token = create_access_token(identity=email)
     return jsonify({'access_token': access_token}), 200
 
     return jsonify({'message': 'Invalid credentials'}), 401
