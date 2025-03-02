@@ -53,8 +53,8 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-
-    else:
+    return jsonify({'message': 'User registered successfully'}), 201
+else:
     # Serve registration form for GET requests
     return '''
     <html>
@@ -68,9 +68,7 @@ def register():
     </body>
     </html>
     '''
-    return jsonify({'message': 'User registered successfully'}), 201
-
-    #Serve registration form for GET requests
+    #Serve regeistration form for GET requests
     return '''
     <html>
     <body>
