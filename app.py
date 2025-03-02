@@ -34,7 +34,7 @@ def register():
         password = data.get('password')
 
     if User.query.filter_by(email=email).first():
-        return jsonify({'message': 'User already exists'}), 400
+    return jsonify({'message': 'User already exists'}), 400
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     new_user = User(email=email, password=hashed_password)
@@ -46,7 +46,7 @@ def register():
 def register():
     if request.method == "POST":
         if User.query.filter_by(email=email).first():
-            return jsonify({'message': 'User already exists'}), 400
+    return jsonify({'message': 'User already exists'}), 400
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     new_user = User(email=email, password=hashed_password)
