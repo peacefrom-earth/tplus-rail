@@ -26,8 +26,9 @@ with app.app_context():
     db.create_all()
 
 # Register Endpoint
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'GET', 'HEAD'])
 def register():
+	if request.method == 'POST':
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
@@ -41,7 +42,20 @@ def register():
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'}), 201
-
+else:
+#Serve regeistration form for GET requests
+return '''
+<html>
+<body>
+<h2>Register</h2>
+<form method='POST'>
+<input type="email" name="email" placeholder="Enter your email" required><br>
+<input type="password" name="password" placeholder"Enter password" required><br>
+<input type="submit" value="Register">
+</form>
+</body>
+</html>
+''', 200
 # Login Endpoint
 @app.route('/login', methods=['POST'])
 def login():

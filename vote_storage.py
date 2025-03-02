@@ -24,8 +24,9 @@ with app.app_context():
     db.create_all()
 
 # Submit Vote Endpoint
-@app.route('/submit-vote', methods=['POST'])
+@app.route('/submit-vote', methods=['POST', 'GET', 'HEAD'])
 def submit_vote():
+if request.method == 'POST':
     data = request.get_json()
     user_email = data.get('email')
     selected_move = data.get('selected_move')
@@ -39,7 +40,19 @@ def submit_vote():
     db.session.commit()
 
     return jsonify({'message': 'Vote submitted successfully'}), 201
-
+else:
+#Serve voting form for GET requests
+return '''
+<html>
+<body>
+<h2>Submit Your Vote</h2>
+<form method='POST'>
+<input type='text' name='slected_move' placeholder='Enter your move' required><br>
+<input type='submit' value='Submit Vote'>
+</form>
+</body>
+</html>
+''', 200
 # Get Results Endpoint
 @app.route('/get-results', methods=['GET'])
 def get_results():
