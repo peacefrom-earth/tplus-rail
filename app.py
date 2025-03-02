@@ -80,9 +80,9 @@ else:
     # Login Endpoint
     @app.route('/login', methods=['POST'])
     def login():
-    data = request.get_json()
-    email = data.get('email')
-    password = data.get('password')
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
 
     user = User.query.filter_by(email=email).first()
     if user and bcrypt.check_password_hash(user.password, password):
