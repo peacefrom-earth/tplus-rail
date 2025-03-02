@@ -29,9 +29,16 @@ with app.app_context():
 @app.route("/register", methods=["GET", "POST", "HEAD"])
 def register():
     if request.method == "POST":
+        #Check Content Type
+        if not request.is_json:
+            return jsonify({'message': 'Content-Type must be application/json'}), 400
+            
         data = request.get_json()
         email = data.get('email')
         password = data.get('password')
+        
+        if not email or not password:
+            return jsonify({'message': 'Email and password are required'})
         
         if User.query.filter_by(email=email).first():
             return jsonify({'message': 'User already exists'}), 400
