@@ -1,1 +1,1 @@
-web: python app.py --host=0.0.0.0 --port=5003
+web: gunicorn -b 0.0.0.0:$PORT app:app --timeout 120
