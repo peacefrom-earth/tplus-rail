@@ -18,4 +18,4 @@ RUN pip3 install -r requirements.txt
 EXPOSE 8080
 
 # Run the Flask app
-CMD ["python3", "app.py", "--host=0.0.0.0", "--port=5003"]
+CMD ["python3", "app.py", "--host=0.0.0.0", "--port=8080"]
