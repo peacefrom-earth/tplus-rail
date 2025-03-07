@@ -47,7 +47,7 @@
     <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="sendMessage(event)">
     
     <script>
-        const socket = io.connect("http://localhost:5003");
+        const socket = io.connect("http://localhost:8080");
         const chatOverlay = document.getElementById("chatOverlay");
         const messageInput = document.getElementById("messageInput");
 
