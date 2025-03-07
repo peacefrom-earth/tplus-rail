@@ -7,7 +7,7 @@ import logging
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
-assigned_port =  os.environ.get("PORT", 5003)
+assigned_port =  os.environ.get("PORT", 8080)
 print(f"Assigned PORT by Railway:{assigned_port}")
 
 # Database Configuration
@@ -82,7 +82,7 @@ def register():
     return jsonify({'message': 'Invalid credentials'}), 401
 
     if __name__ == '__main__':
-        port = int(os.environ.get("PORT",5003))
+        port = int(os.environ.get("PORT",8080))
         app.run(host="0.0.0.0", port=port, debug=True)
         
         for rule in app.url_map.iter_rules():
