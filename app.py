@@ -3,8 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token
 import os
+import logging
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 # Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///users.db')
@@ -79,7 +81,7 @@ def register():
 
     if __name__ == '__main__':
         port = int(os.environ.get("PORT",5000))
-        app.run(host="0.0.0.0", port=port)
+        app.run(host="0.0.0.0", port=port, debug=True)
         
         for rule in app.url_map.iter_rules():
             print(f"Route: {rule} - Methods: {rule.methods}")
