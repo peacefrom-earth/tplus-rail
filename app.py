@@ -7,6 +7,8 @@ import logging
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
+assigned_port =  os.environ.get("PORT", 5003)
+print(f"Assigned PORT by Railway:{assigned_port}")
 
 # Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///users.db')
