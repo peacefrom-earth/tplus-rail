@@ -4,11 +4,14 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token
 import os
 import logging
+import psycopg2
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 assigned_port =  os.environ.get("PORT", 8080)
 print(f"Assigned PORT by Railway:{assigned_port}")
+conn=psycopg2.connect(db_url, sslmode='require')
+
 
 # Database Configuration
 db_url = os.getenv('DATABASE_URL').replace('postgres://','postgresql://')
