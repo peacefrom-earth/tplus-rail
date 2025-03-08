@@ -43,7 +43,6 @@ mdurl==0.1.2
 packaging==24.2
 psutil==7.0.0
 psycopg2-binary==2.9.10
-psycopg2==2.9.6
 pyclang==0.6.0
 pycparser==2.22
 pydantic==2.10.6
