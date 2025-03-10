@@ -95,3 +95,7 @@ def register():
         for rule in app.url_map.iter_rules():
             print(f"Route: {rule} - Methods: {rule.methods}")
     
+#healthcheck
+	@app.route("/health")
+	def health():
+	    return "OK", 200

@@ -21,5 +21,5 @@ EXPOSE 8080
 ENV PORT=8080
 
 # Use run.sh as the entry point
-CMD ["/bin/bash", "run.sh"]
+CMD ["/bin/bash", "run.sh", "--log-level", "debug"]
 
